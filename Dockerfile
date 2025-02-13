@@ -17,4 +17,4 @@ COPY --from=builder ./app/dist /usr/share/nginx/html
 
 # EXPOSE ??
 
-EXPOSE 8080
+EXPOSE 8090
