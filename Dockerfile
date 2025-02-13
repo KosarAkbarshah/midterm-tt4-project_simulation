@@ -1,18 +1,20 @@
-# Layer 1: Build the frontend
+# 2 layers
+
+# Layer 1
 FROM node:latest AS builder
 WORKDIR /app
 COPY ./app/package*.json ./
 RUN npm install
 COPY ./app/ ./
 RUN npm run build 
-# The built files are stored in /dist
+# in the end I have the /dist
 
-# Layer 2: Serve with Nginx
+# Layer 2
+
 FROM nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Replace the default Nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder ./app/dist /usr/share/nginx/html
 
-# Expose port 8500
-EXPOSE 8500
+# EXPOSE ??
+
+EXPOSE 8080
